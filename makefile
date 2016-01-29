@@ -1,4 +1,4 @@
-OFLAGS = 
+OFLAGS =  -O3
 CC=g++
 STD=-std=c++14
 CFLAGS= -g -c -W -Wall -Wextra $(STD) -Wno-missing-field-initializers -Wshadow \
