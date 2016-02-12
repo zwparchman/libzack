@@ -32,7 +32,7 @@ void Timer::_continue(){
   running = true;
 }
 
-long int Timer::getMicroTime(){
+long int Timer::getMicroTime()const{
   //duration<std::chrono::microseconds> time_span ;
   long int time_span;
   if( running ){
@@ -43,7 +43,7 @@ long int Timer::getMicroTime(){
   return time_span;
 }
 
-double Timer::getTime(){
+double Timer::getTime()const{
   duration<double> time_span ;
   if( running ){
     time_span = duration_cast<duration<double>>( steady_clock::now() - start_time );

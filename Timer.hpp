@@ -24,10 +24,10 @@ struct Timer{
   void _continue();
 
   //return time in microseconds
-  long int getMicroTime();
+  long int getMicroTime() const;
 
   //return time in seconds
-  double getTime();
+  double getTime() const;
 };
 
 #endif
