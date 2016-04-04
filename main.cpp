@@ -3,6 +3,7 @@
 #include "Channel.hpp"
 #include "utility.hpp"
 #include <unistd.h>
+#include "Defer.hpp"
 
 #include <gtest/gtest.h>
 
@@ -136,6 +137,43 @@ TEST(channel, late_emplace_fails){
   }
 
   ADD_FAILURE()<<"Should have thrown an exception";
+}
+
+TEST(defer, occurs){
+  int i=0;
+  {
+    Defer ([&](){i++;});
+  }
+    EXPECT_EQ(i,1);
+}
+
+TEST(defer, cancel){
+  int i=0;
+  {
+    Defer d([&](){i++;});
+    d.deactivate();
+  }
+  EXPECT_EQ(i,0);
+}
+
+TEST(defer, multiple_runs){
+  int i=0;
+  int j=0;
+  {
+    Defer d1([&](){i++;});
+    Defer d2([&](){j++;});
+  }
+  EXPECT_EQ(i,1);
+  EXPECT_EQ(j,1);
+
+  {
+    Defer d1([&](){i++;});
+    Defer d2([&](){j++;});
+    d2.deactivate();
+  }
+
+  EXPECT_EQ(i,2);
+  EXPECT_EQ(j,1);
 }
 
 int main(int argc, char ** argv ){
