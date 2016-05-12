@@ -13,7 +13,7 @@ SObjects= Timer.o
 
 all : libzacklib.so program
 
-libzacklib.so : $(SObjects) 
+libzacklib.so : $(SObjects)  *hpp
 	$(CC) -fpic -shared $(LFLAGS) -olibzacklib.so Timer.o
 
 Timer.o : Timer.cpp Timer.hpp
