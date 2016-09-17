@@ -2,7 +2,7 @@ OFLAGS =  -O3
 CC=g++
 STD=-std=c++14
 CFLAGS= -g -c -W -Wall -Wextra $(STD) -Wno-missing-field-initializers -Wshadow \
-				$(OFLAGS) -I.
+				$(OFLAGS) -I. -isystem ./googletest/googletest/include
 LFLAGS= -g $(STD) $(OFLAGS) -pthread -L.
 
 .PHONY:clean 
@@ -19,8 +19,8 @@ libzacklib.so : $(SObjects)
 Timer.o : Timer.cpp Timer.hpp
 	$(CC) -fpic $(CFLAGS) Timer.cpp
 
-program: $(Objects) $(SObjects) libzacklib.so *hpp *cpp
-	$(CC) $(LFLAGS) -o program $(Objects) -L. -lzacklib /home/zack/src/googletest/googletest/build/libgtest.a
+program: $(Objects) $(SObjects) libzacklib.so *hpp *cpp libgtest.a
+	$(CC) $(LFLAGS) -o program $(Objects) -L. -lzacklib libgtest.a
 
 $(Objects): %.o: %.cpp
 	$(CC) $(CFLAGS) $<
@@ -44,6 +44,12 @@ call: program
 
 inspect: 
 	kcachegrind c*grind\.out\.*
+
+libgtest.a:
+	( cd googletest/googletest && \
+	cmake . && \
+	make && \
+	cp libgtest.a ../../ )
 
 clean:
 	rm -f *o 

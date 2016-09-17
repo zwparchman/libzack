@@ -2,3 +2,5 @@
 *o
 libzacklib.so
 program
+libgtest.a
+googletest

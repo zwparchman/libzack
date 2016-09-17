@@ -26,6 +26,11 @@ TEST( lerp, int_test){
   EXPECT_EQ( 5, lerp( 0.5f, pair<int,int>(0,10)));
 }
 
+TEST( lerp, double_test){
+  EXPECT_EQ(10.0, lerp(1.0, pair<double,double>(0.0, 10.0)));
+  EXPECT_EQ(5.0, lerp(0.5, pair<double,double>(0.0, 10.0)));
+}
+
 TEST( remap, basic ){
   EXPECT_EQ( 5, remap( 0.5f, pair<float,float>(0,1), pair<int,int>(0,10)));
   EXPECT_EQ( 6, remap( 0.5f, pair<float,float>(0,1), pair<int,int>(1,11)));
