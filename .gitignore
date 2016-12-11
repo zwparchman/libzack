@@ -2,3 +2,8 @@
 *o
 libzacklib.so
 program
+libgtest.a
+googletest
+color.h
+libzacklib.a
+visual_color_test

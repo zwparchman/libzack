@@ -4,7 +4,7 @@ The functionality includes
 
 Timer - An easy to use timing class  
 
-Channel - A go inspired channel class for inter-process communication  
+Channel - A go inspired channel class for inter-thread communication  
 
 Defer - Runs a supplied function (lambdas included) on destructoin. It can be deactivated so the function isn't called.
 
