@@ -33,7 +33,7 @@ T lerp( double val, std::pair<T,T> range){
 }
 
 template <typename T, typename R>
-R remap( T val, std::pair<T,T> range1, std::pair<R,R> range2){
+R constexpr remap( T val, std::pair<T,T> range1, std::pair<R,R> range2){
   assert( range1.first <= range1.second);
 
   double v = normalize( val, range1);
