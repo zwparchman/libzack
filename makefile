@@ -11,10 +11,19 @@ Objects= main.o
 SObjects= Timer.o
 
 
-all : libzacklib.so program
+all : libzacklib.so program libzacklib.a visual_color_test
+
+visual_color_test: build_color.py color_main.cpp
+	gcc color_main.cpp -o visual_color_test
+
+color.h: build_color.py
+	./build_color.py > color.h
 
 libzacklib.so : $(SObjects)  *hpp
 	$(CC) -fpic -shared $(LFLAGS) -olibzacklib.so Timer.o
+
+libzacklib.a: $(SObjects) *hpp
+	ar r libzacklib.a $(SObjects)
 
 Timer.o : Timer.cpp Timer.hpp
 	$(CC) -fpic $(CFLAGS) Timer.cpp
